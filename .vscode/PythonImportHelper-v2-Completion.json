@@ -1,0 +1,294 @@
+[
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "pipelines",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "pipelines",
+        "importPath": "transformers",
+        "description": "transformers",
+        "isExtraImport": true,
+        "detail": "transformers",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "create_engine",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Column",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Integer",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "String",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Float",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Text",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "sessionmaker",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "declarative_base",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "spacy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "spacy",
+        "description": "spacy",
+        "detail": "spacy",
+        "documentation": {}
+    },
+    {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
+        "label": "analyze",
+        "importPath": "app.analyze",
+        "description": "app.analyze",
+        "isExtraImport": true,
+        "detail": "app.analyze",
+        "documentation": {}
+    },
+    {
+        "label": "cross_check_fact",
+        "kind": 2,
+        "importPath": "Backend.app.services.cross_checker",
+        "description": "Backend.app.services.cross_checker",
+        "peekOfCode": "def cross_check_fact(fact: str):\n    return [\n        {\n            \"source\": \"OMS\",\n            \"status\": \"confirmé\",\n            \"comment\": \"Aucune preuve scientifique\"\n        },\n        {\n            \"source\": \"Le Monde\",\n            \"status\": \"partiel\",",
+        "detail": "Backend.app.services.cross_checker",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate_source",
+        "kind": 2,
+        "importPath": "Backend.app.services.source_verifier",
+        "description": "Backend.app.services.source_verifier",
+        "peekOfCode": "def evaluate_source(url: str | None):\n    score = 50\n    details = {\n        \"authority\": False,\n        \"traceability\": False,\n        \"reputation\": False,\n        \"transparency\": False\n    }\n    if not url:\n        return score, details",
+        "detail": "Backend.app.services.source_verifier",
+        "documentation": {}
+    },
+    {
+        "label": "compute_trust_score",
+        "kind": 2,
+        "importPath": "Backend.app.services.trust_score",
+        "description": "Backend.app.services.trust_score",
+        "peekOfCode": "def compute_trust_score(source_score, bias_score, fake_label):\n    score = source_score\n    if fake_label == \"FAKE\":\n        score -= 30\n    if bias_score > 75:\n        score -= 20\n    elif bias_score > 60:\n        score -= 10\n    score = max(0, min(score, 100))\n    if score >= 80:",
+        "detail": "Backend.app.services.trust_score",
+        "documentation": {}
+    },
+    {
+        "label": "analyze",
+        "kind": 2,
+        "importPath": "Backend.app.analyze",
+        "description": "Backend.app.analyze",
+        "peekOfCode": "def analyze(content: str, source_url: str | None = None):\n    facts = extract_facts(content)\n    bias = analyze_bias(content)\n    fake = detect_fake_news(content)\n    source_score, source_details = evaluate_source(source_url)\n    cross_results = []\n    for fact in facts:\n        cross_results.append({\n            \"fact\": fact,\n            \"results\": cross_check_fact(fact)",
+        "detail": "Backend.app.analyze",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "Backend.app.analyze",
+        "description": "Backend.app.analyze",
+        "peekOfCode": "router = APIRouter()\n@router.post(\"/analyze\")\ndef analyze(content: str, source_url: str | None = None):\n    facts = extract_facts(content)\n    bias = analyze_bias(content)\n    fake = detect_fake_news(content)\n    source_score, source_details = evaluate_source(source_url)\n    cross_results = []\n    for fact in facts:\n        cross_results.append({",
+        "detail": "Backend.app.analyze",
+        "documentation": {}
+    },
+    {
+        "label": "analyze_bias",
+        "kind": 2,
+        "importPath": "Backend.app.bias",
+        "description": "Backend.app.bias",
+        "peekOfCode": "def analyze_bias(text: str):\n    result = sentiment_pipeline(text)[0]\n    score = result[\"score\"]\n    if score > 0.85:\n        level = \"Élevé\"\n    elif score > 0.65:\n        level = \"Moyen\"\n    else:\n        level = \"Faible\"\n    return {",
+        "detail": "Backend.app.bias",
+        "documentation": {}
+    },
+    {
+        "label": "sentiment_pipeline",
+        "kind": 5,
+        "importPath": "Backend.app.bias",
+        "description": "Backend.app.bias",
+        "peekOfCode": "sentiment_pipeline = pipelines(\"sentiment-analysis\")\ndef analyze_bias(text: str):\n    result = sentiment_pipeline(text)[0]\n    score = result[\"score\"]\n    if score > 0.85:\n        level = \"Élevé\"\n    elif score > 0.65:\n        level = \"Moyen\"\n    else:\n        level = \"Faible\"",
+        "detail": "Backend.app.bias",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASE_URL",
+        "kind": 5,
+        "importPath": "Backend.app.config",
+        "description": "Backend.app.config",
+        "peekOfCode": "DATABASE_URL = os.getenv(\n    \"DATABASE_URL\",\n    \"sqlite:///./data.db\"\n)\nGOOGLE_FACT_CHECK_API_KEY = os.getenv(\"GOOGLE_FACT_CHECK_API_KEY\", \"\")",
+        "detail": "Backend.app.config",
+        "documentation": {}
+    },
+    {
+        "label": "GOOGLE_FACT_CHECK_API_KEY",
+        "kind": 5,
+        "importPath": "Backend.app.config",
+        "description": "Backend.app.config",
+        "peekOfCode": "GOOGLE_FACT_CHECK_API_KEY = os.getenv(\"GOOGLE_FACT_CHECK_API_KEY\", \"\")",
+        "detail": "Backend.app.config",
+        "documentation": {}
+    },
+    {
+        "label": "engine",
+        "kind": 5,
+        "importPath": "Backend.app.database",
+        "description": "Backend.app.database",
+        "peekOfCode": "engine = create_engine(DATABASE_URL)\nSessionLocal = sessionmaker(bind=engine)\nBase = declarative_base()",
+        "detail": "Backend.app.database",
+        "documentation": {}
+    },
+    {
+        "label": "SessionLocal",
+        "kind": 5,
+        "importPath": "Backend.app.database",
+        "description": "Backend.app.database",
+        "peekOfCode": "SessionLocal = sessionmaker(bind=engine)\nBase = declarative_base()",
+        "detail": "Backend.app.database",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "kind": 5,
+        "importPath": "Backend.app.database",
+        "description": "Backend.app.database",
+        "peekOfCode": "Base = declarative_base()",
+        "detail": "Backend.app.database",
+        "documentation": {}
+    },
+    {
+        "label": "Analysis",
+        "kind": 6,
+        "importPath": "Backend.app.db_models",
+        "description": "Backend.app.db_models",
+        "peekOfCode": "class Analysis(Base):\n    __tablename__ = \"analyses\"\n    id = Column(Integer, primary_key=True)\n    content = Column(Text)\n    source_score = Column(Float)\n    bias_score = Column(Float)\n    fake_score = Column(Float)\n    final_score = Column(Float)\n    conclusion = Column(String)",
+        "detail": "Backend.app.db_models",
+        "documentation": {}
+    },
+    {
+        "label": "extract_facts",
+        "kind": 2,
+        "importPath": "Backend.app.extractor",
+        "description": "Backend.app.extractor",
+        "peekOfCode": "def extract_facts(text: str):\n    doc = nlp(text)\n    facts = []\n    for sent in doc.sents:\n        if len(sent.text.strip()) > 10:\n            facts.append(sent.text.strip())\n    return facts",
+        "detail": "Backend.app.extractor",
+        "documentation": {}
+    },
+    {
+        "label": "detect_fake_news",
+        "kind": 2,
+        "importPath": "Backend.app.fake_news",
+        "description": "Backend.app.fake_news",
+        "peekOfCode": "def detect_fake_news(text: str):\n    res = fake_news_classifier(text)[0]\n    return {\n        \"label\": res[\"label\"],   # FAKE / REAL\n        \"confidence\": round(res[\"score\"] * 100, 2)\n    }",
+        "detail": "Backend.app.fake_news",
+        "documentation": {}
+    },
+    {
+        "label": "fake_news_classifier",
+        "kind": 5,
+        "importPath": "Backend.app.fake_news",
+        "description": "Backend.app.fake_news",
+        "peekOfCode": "fake_news_classifier = pipelines(\n    \"text-classification\",\n    model=\"jy46604790/Fake-News-Bert-Classification\"\n)\ndef detect_fake_news(text: str):\n    res = fake_news_classifier(text)[0]\n    return {\n        \"label\": res[\"label\"],   # FAKE / REAL\n        \"confidence\": round(res[\"score\"] * 100, 2)\n    }",
+        "detail": "Backend.app.fake_news",
+        "documentation": {}
+    },
+    {
+        "label": "root",
+        "kind": 2,
+        "importPath": "Backend.main",
+        "description": "Backend.main",
+        "peekOfCode": "def root():\n    return {\"status\": \"API Fact Checking active\"}",
+        "detail": "Backend.main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "Backend.main",
+        "description": "Backend.main",
+        "peekOfCode": "app = FastAPI(\n    title=\"AI Fact Checking API\",\n    description=\"Vérification intelligente des sources et fact-checking\",\n    version=\"1.0.0\"\n)\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],",
+        "detail": "Backend.main",
+        "documentation": {}
+    }
+]
