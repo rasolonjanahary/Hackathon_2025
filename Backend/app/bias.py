@@ -1,6 +1,6 @@
-from transformers import pipelines
+from transformers import pipeline
 
-sentiment_pipeline = pipelines("sentiment-analysis")
+sentiment_pipeline = pipeline("sentiment-analysis")
 
 def analyze_bias(text: str):
     result = sentiment_pipeline(text)[0]

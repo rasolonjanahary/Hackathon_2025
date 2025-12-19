@@ -26,7 +26,9 @@ def analyze(content: str, source_url: str | None = None):
     final_score, conclusion = compute_trust_score(
         source_score,
         bias["bias_score"],
-        fake["label"]
+        fake["label"],
+        fake["fake_risk"],
+        fake["truth_probability"]
     )
 
     return {
